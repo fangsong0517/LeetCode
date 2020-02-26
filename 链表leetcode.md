@@ -22,9 +22,9 @@
 
 你能尝试使用一趟扫描实现吗？
 
-![img](https://pic.leetcode-cn.com/cc43daa8cbb755373ce4c5cd10c44066dc770a34a6d2913a52f8047cbf5e6e56-file_1559548337458)
+<img src="https://pic.leetcode-cn.com/cc43daa8cbb755373ce4c5cd10c44066dc770a34a6d2913a52f8047cbf5e6e56-file_1559548337458" alt="img" style="zoom:50%;" />
 
-思想：刚开始创建一个虚拟头结点，让虚拟头结点的next指向head,然后将p,q同时指向虚拟头，将ｑ往后移动ｎ + 1位，然后将ｑ与ｐ同时往后移动直到ｑ为空时，ｐ指向的是所要删除的结点前一个位置，删掉即可。
+<font color = red>思想：刚开始创建一个虚拟头结点，让虚拟头结点的next指向head,然后将p,q同时指向虚拟头，将ｑ往后移动ｎ + 1位，然后将ｑ与ｐ同时往后移动直到ｑ为空时，ｐ指向的是所要删除的结点前一个位置，删掉即可。</font>
 
 ```cpp
 /**
@@ -69,7 +69,11 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
 给定 1->2->3->4, 你应该返回 2->1->4->3.
 ```
 
-![leetcode24swapnodeinparis.JPG](https://pic.leetcode-cn.com/763b502bd7d33405e1f24473b509a4441fa24f5d074f2b0f2649b5842bce6712-leetcode24swapnodeinparis.JPG)
+<font color = red> 先将ｐ指向虚拟头，ｑ指向ｈｅａｄ，将ｐ指向ｑ的下一个元素也就是２，ｑ指向３也就是ｐ的下下一个结点，然后将ｐ的下下一个节点指向１也就是ｑ，最后将ｑ赋值给ｐ，ｑ往后移动一位，继续循环</font>
+
+<img src="https://pic.leetcode-cn.com/763b502bd7d33405e1f24473b509a4441fa24f5d074f2b0f2649b5842bce6712-leetcode24swapnodeinparis.JPG" alt="leetcode24swapnodeinparis.JPG" style="zoom: 33%;" />
+
+
 
 ```cpp
 /**
@@ -117,6 +121,10 @@ struct ListNode* swapPairs(struct ListNode* head){
 输出: 1->2->3
 ```
 
+
+
+<font color = red>思路：前后比较，如果相同则删除后一个，不相同的往后走</font>
+
 ```cpp
 /**
  * Definition for singly-linked list.
@@ -127,11 +135,11 @@ struct ListNode* swapPairs(struct ListNode* head){
  */
 
 struct ListNode* deleteDuplicates(struct ListNode* head){
-    struct ListNode *p = head, *q;
+    struct ListNode *p = head, *q;　
     while(p && p->next) {
-        if(p->val - p->next->val) {
+        if(p->val - p->next->val) { // 如果前后不同指针往后走
             p = p->next;
-        } else {
+        } else {//如果相同则删除释放一个节点
             q = p->next;
             p->next = q->next;
             free(q);
@@ -141,6 +149,8 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 }
 ```
 
+
+
 #### [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
 
 难度简单498
@@ -149,18 +159,13 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 
 为了表示给定链表中的环，我们使用整数 `pos` 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 `pos` 是 `-1`，则在该链表中没有环。
 
- 
-
 **示例 1：**
-
 ```
 输入：head = [3,2,0,-4], pos = 1
 输出：true
 解释：链表中有一个环，其尾部连接到第二个节点。
 ```
-
-![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png)
-
+<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" alt="img" style="zoom:50%;" />
 **示例 2：**
 
 ```
@@ -168,9 +173,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 输出：true
 解释：链表中有一个环，其尾部连接到第一个节点。
 ```
-
-![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png)
-
+<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" alt="img" style="zoom:50%;" />
 **示例 3：**
 
 ```
@@ -178,10 +181,8 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 输出：false
 解释：链表中没有环。
 ```
-
-![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png)
-
- **快慢指针**:前面指针快，后面指针慢，如果能重合，就相当于是圆的；
+<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" alt="img" style="zoom:50%;" />
+<font color = red> **快慢指针**:前面指针快，后面指针慢，如果能重合，证明有环存在的；</font>
 
 ```cpp
 /**
@@ -213,19 +214,13 @@ struct ListNode *p = head, *q = head;
 为了表示给定链表中的环，我们使用整数 `pos` 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 `pos` 是 `-1`，则在该链表中没有环。
 
 **说明：**不允许修改给定的链表。
-
- 
-
 **示例 1：**
-
 ```
 输入：head = [3,2,0,-4], pos = 1
 输出：tail connects to node index 1
 解释：链表中有一个环，其尾部连接到第二个节点。
 ```
-
-![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png)
-
+<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" alt="img" style="zoom:50%;" />
 **示例 2：**
 
 ```
@@ -233,9 +228,7 @@ struct ListNode *p = head, *q = head;
 输出：tail connects to node index 0
 解释：链表中有一个环，其尾部连接到第一个节点。
 ```
-
-![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png)
-
+<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" alt="img" style="zoom:50%;" />
 **示例 3：**
 
 ```
@@ -243,10 +236,12 @@ struct ListNode *p = head, *q = head;
 输出：no cycle
 解释：链表中没有环。
 ```
+<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" alt="img" style="zoom:50%;" />
 
-![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png)
+ <font color = red> **思路** :先让一个快指针一个慢指针往后走，先让他俩在环中循环，肯定能交于随机的一点，但不一定是入口，此时将快指针指向０开始，然后按慢指针速度同步走，寻找到相同的点是入口点，返回即可</font>
 
  ```cpp
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -263,35 +258,26 @@ struct ListNode *detectCycle(struct ListNode *head) {
         if(q == NULL || q->next == NULL) return NULL;
         q = q->next;
     } while(p != q);
-    int cnt = 0;
+   /* int cnt = 0;
     do {
         cnt ++;
         p = p->next;
     } while(p != q);
     p = head, q = head;
-    while(cnt--)q = q -> next;
+    while(cnt--)q = q -> next;*/
+    p = head;
     while(p !=  q) p = p->next, q = q->next;
     return p;
 }
  ```
-
-
-
 #### [160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
-
 难度简单543
-
 编写一个程序，找到两个单链表相交的起始节点。
-
 如下面的两个链表**：**
-
-[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png)](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png)
-
+[<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" alt="img" style="zoom:50%;" />](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png)
 在节点 c1 开始相交。
-
 **示例 1：**
-
-[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_1.png)](https://assets.leetcode.com/uploads/2018/12/13/160_example_1.png)
+[<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_1.png" alt="img" style="zoom:50%;" />](https://assets.leetcode.com/uploads/2018/12/13/160_example_1.png)
 
 ```
 输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
@@ -299,15 +285,15 @@ struct ListNode *detectCycle(struct ListNode *head) {
 输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
 ```
 **示例 2：**
-[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_2.png)](https://assets.leetcode.com/uploads/2018/12/13/160_example_2.png)
+[<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_2.png" alt="img" style="zoom:50%;" />](https://assets.leetcode.com/uploads/2018/12/13/160_example_2.png)
+
 ```
 输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
 输出：Reference of the node with value = 2
 输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。
 ```
 **示例 3：**
-
-[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png)](https://assets.leetcode.com/uploads/2018/12/13/160_example_3.png)
+[<img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png" alt="img" style="zoom:50%;" />](https://assets.leetcode.com/uploads/2018/12/13/160_example_3.png)
 
 ```
 输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
@@ -321,9 +307,7 @@ struct ListNode *detectCycle(struct ListNode *head) {
 - 可假定整个链表结构中没有循环。
 - 程序尽量满足 O(*n*) 时间复杂度，且仅用 O(*1*) 内存。
 
-
-
-**思路**：消除长度差
+<font color = red>**思路**：消除长度差，在开始同步寻找时，先消除长度差，然后一起往后进行遍历，走到相同地址时返回即可，在消除长度差时，先让其同步往后走，如果谁先走到ＮＵＬＬ然后以另一方为头开始往后走，直到结束为止</font>
 
 ```cpp
 /**
@@ -342,4 +326,12 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
     return p1;
 }
 ```
+
+
+
+
+
+
+
+
 
