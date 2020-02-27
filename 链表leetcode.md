@@ -7,23 +7,15 @@
 给定一个链表，删除链表的倒数第 *n* 个节点，并且返回链表的头结点。
 
 **示例：**
-
 ```
 给定一个链表: 1->2->3->4->5, 和 n = 2.
-
 当删除了倒数第二个节点后，链表变为 1->2->3->5.
 ```
-
 **说明：**
-
 给定的 *n* 保证是有效的。
-
 **进阶：**
-
 你能尝试使用一趟扫描实现吗？
-
 <img src="https://pic.leetcode-cn.com/cc43daa8cbb755373ce4c5cd10c44066dc770a34a6d2913a52f8047cbf5e6e56-file_1559548337458" alt="img" style="zoom:50%;" />
-
 <font color = red>思想：刚开始创建一个虚拟头结点，让虚拟头结点的next指向head,然后将p,q同时指向虚拟头，将ｑ往后移动ｎ + 1位，然后将ｑ与ｐ同时往后移动直到ｑ为空时，ｐ指向的是所要删除的结点前一个位置，删掉即可。</font>
 
 ```cpp
@@ -329,9 +321,295 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
 
 
 
+#### [202. 快乐数](https://leetcode-cn.com/problems/happy-number/)
+难度简单241
+编写一个算法来判断一个数是不是“快乐数”。
+一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。
+**示例:** 
 
+```
+输入: 19
+输出: true
+解释: 
+12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+```
 
+<font color = red>思路：抽象成链表，快慢指针是否出现环</font>
 
+```cpp
+//如果给定的数字最后会一直循环重复，那么快的指针（值）一定会追上慢的指针（值），也就是
+//两者一定会相等。如果没有循环重复，那么最后快慢指针也会相等，且都等于1。
+int get_next(int n) {
+    int temp = 0;
+    while(n) {
+        temp+= (n % 10) * ( n % 10);
+        n /= 10;
+    }
+    return temp;
+}
+bool insHappy(int n) {
+    int p = n, q = n;
+    while(q != 1) {
+        p = get_next(p);
+        q = get_next(get_next(q));
+        if(p == q) break;
+    }
+    return q == 1;
+}
+```
 
+#### [203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)
 
+难度简单346
+
+删除链表中等于给定值 **val** 的所有节点。
+**示例:**
+```
+输入: 1->2->6->3->4->5->6, val = 6
+输出: 1->2->3->4->5
+```
+<font color = red>思路：整一个虚拟头，找到p->next是否等于所要删除的元素，此时ｐ为所要删除的前一个元素，将p->next删除就可以了 </font>
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* removeElements(struct ListNode* head, int val){
+    struct ListNode ret, *p , *q;
+    ret.next = head;
+    p = &ret;
+    while(p && p->next) {
+        if(p->next ->val== val) {
+            q = p->next;
+            p->next = q->next;
+            free(q);
+        } else {
+            p = p->next;
+        }
+    }
+    return ret.next;
+}
+```
+
+#### [206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+
+难度简单781
+
+反转一个单链表。
+
+**示例:**
+
+```
+输入: 1->2->3->4->5->NULL
+输出: 5->4->3->2->1->NULL
+```
+
+**进阶:**
+你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+struct ListNode* reverseList(struct ListNode* head){
+    if(head == NULL) return head;
+    struct ListNode * p, *q, ret;
+    ret.next = NULL;
+    p = head;
+    while(p) {
+        q = p->next;
+        p->next = ret.next;
+        ret.next = p;
+        p = q;
+    }
+    return ret.next;
+}
+```
+
+#### [234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
+
+难度简单409收藏分享切换为英文关注反馈
+
+请判断一个链表是否为回文链表。
+
+**示例 1:**
+
+```
+输入: 1->2
+输出: false
+```
+
+**示例 2:**
+
+```
+输入: 1->2->2->1
+输出: true
+```
+
+**进阶：**
+你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+
+<font color = red>思路：先将链表分为两部分，将后面一部分进行翻转，然后进行比较两段是否匹配</font>
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+int get_length(struct ListNode *head)
+{
+    int n = 0;
+    while(head)n+=1,head=head->next;
+    return n;
+}
+
+struct ListNode *reverse(struct ListNode *head, int n) {
+    struct ListNode ret, *p = head, *q;
+    while(n--) p = p->next;
+    ret.next = NULL;
+    while(p) {
+        q = p->next;
+        p->next = ret.next;
+        ret.next = p;
+        p = q;
+    }
+    return ret.next;
+}
+bool isPalindrome(struct ListNode* head){
+    int len = get_length(head);
+    struct ListNode *p = head, *q = reverse(head, (len + 1 ) / 2);
+    while(q) {
+        if(p->val - q->val)return false;
+        p=p->next;
+        q=q->next;
+    }
+return true;
+}
+```
+
+#### [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)
+
+难度简单623
+
+请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
+
+现有一个链表 -- head = [4,5,1,9]，它可以表示为:
+
+![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/01/19/237_example.png)
+
+ 
+
+**示例 1:**
+
+```
+输入: head = [4,5,1,9], node = 5
+输出: [4,1,9]
+解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -> 1 -> 9.
+```
+
+**示例 2:**
+
+```
+输入: head = [4,5,1,9], node = 1
+输出: [4,5,9]
+解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -> 5 -> 9.
+```
+
+**说明:**
+
+- 链表至少包含两个节点。
+- 链表中所有节点的值都是唯一的。
+- 给定的节点为非末尾节点并且一定是链表中的一个有效节点。
+- 不要从你的函数中返回任何结果。
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+void deleteNode(struct ListNode* node) {
+    struct ListNode *t = node->next;
+    node->val = t->val;
+    node->next = t->next;
+    free(t);
+}
+```
+
+#### [287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)
+
+难度中等433
+
+给定一个包含 *n* + 1 个整数的数组 *nums*，其数字都在 1 到 *n* 之间（包括 1 和 *n*），可知至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。
+
+**示例 1:**
+
+```
+输入: [1,3,4,2,2]
+输出: 2
+```
+
+**示例 2:**
+
+```
+输入: [3,1,3,4,2]
+输出: 3
+```
+
+**说明：**
+
+1. **不能**更改原数组（假设数组是只读的）。
+2. 只能使用额外的 *O*(1) 的空间。
+3. 时间复杂度小于 *O*(*n*2) 。
+4. 数组中只有一个重复的数字，但它可能不止重复出现一次。
+
+```cpp
+/*int findDuplicate(int* nums, int numsSize){
+    int k = 0, m = 0;
+    while(1) {
+        k = nums[nums[k]];
+        m = nums[m];
+        if(k == m) {
+            k = 0;
+            while(nums[k] != nums[m]) {
+                k = nums[k];
+                m = nums[m];
+            }
+            return nums[m];
+        }
+    }
+}*/
+int findDuplicate(int* nums, int numsSize){
+    int p = nums[0], q = nums[0];
+    do {
+        p = nums[p];
+        q = nums[nums[q]];
+    } while(p != q);
+    q = nums[0];
+    while(p!=q) {
+        p = nums[p];
+        q = nums[q];
+    }
+    return p;
+}
+```
+<font color =red>快慢指针寻找环入口法证明：</font><img src="https://static.dingtalk.com/media/lADPGoGu6sN4h9nNB43NCCw_2092_1933.jpg_620x10000q90g.jpg?auth_bizType=IM&amp;auth_bizEntity=%7B%22cid%22%3A%22627064533%3A627064533%22%2C%22msgId%22%3A%222541553216786%22%7D&amp;bizType=im&amp;open_id=627064533" alt="图片" style="zoom: 80%;" />
 
