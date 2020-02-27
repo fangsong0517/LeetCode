@@ -1,12 +1,17 @@
+
+
+[TOC]
+
 ##　链表leetcode
 
-#### [19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
+#### [19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)（找同步位置）
 
 难度 中等 696
 
 给定一个链表，删除链表的倒数第 *n* 个节点，并且返回链表的头结点。
 
 **示例：**
+
 ```
 给定一个链表: 1->2->3->4->5, 和 n = 2.
 当删除了倒数第二个节点后，链表变为 1->2->3->5.
@@ -143,7 +148,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 
 
 
-#### [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+#### [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)(双指针算法判环)
 
 难度简单498
 
@@ -197,7 +202,7 @@ struct ListNode *p = head, *q = head;
 }
 ```
 
-#### [142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+#### [142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)（双指针算法找入口）
 
 难度中等369
 
@@ -262,7 +267,7 @@ struct ListNode *detectCycle(struct ListNode *head) {
     return p;
 }
  ```
-#### [160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+#### [160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)（消除长度差）
 难度简单543
 编写一个程序，找到两个单链表相交的起始节点。
 如下面的两个链表**：**
@@ -310,18 +315,18 @@ struct ListNode *detectCycle(struct ListNode *head) {
  * };
  */
 struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
-    struct ListNode *p1 = headA, *p2 = headB;
-    while(p1!=p2) {
-        p1 = (p1 == NULL ? headB : p1->next);
-        p2 = (p2 == NULL ? headA : p2->next);
+    struct ListNode *p1 = headA, *p2 = headB; //定义两个指针分别指向头
+    while(p1!=p2) {//寻找两个指针指向同一地址时
+        p1 = (p1 == NULL ? headB : p1->next);// 如果p1为空则指向headB,也就是另一个头，不为空往后走
+        p2 = (p2 == NULL ? headA : p2->next);//如果p2为空则指向另一个头headA,不为空往后走
     }
-    return p1;
+    return p1; //返回p1和p2都行
 }
 ```
 
 
 
-#### [202. 快乐数](https://leetcode-cn.com/problems/happy-number/)
+#### [202. 快乐数](https://leetcode-cn.com/problems/happy-number/)（双指针算法判环）
 难度简单241
 编写一个算法来判断一个数是不是“快乐数”。
 一个“快乐数”定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如果可以变为 1，那么这个数就是快乐数。
@@ -337,12 +342,12 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
 12 + 02 + 02 = 1
 ```
 
-<font color = red>思路：抽象成链表，快慢指针是否出现环</font>
+<font color = red>思路：抽象成链表，快慢指针是否出现环使用“快慢指针”思想找出循环：“快指针”每次走两步，“慢指针”每次走一步，当二者相等时，即为一个循环周期。此时，判断是不是因为1引起的循环，是的话就是快乐数，否则不是快乐数。</font>
 
 ```cpp
 //如果给定的数字最后会一直循环重复，那么快的指针（值）一定会追上慢的指针（值），也就是
 //两者一定会相等。如果没有循环重复，那么最后快慢指针也会相等，且都等于1。
-int get_next(int n) {
+int get_next(int n) {// 获取一个加法后的值
     int temp = 0;
     while(n) {
         temp+= (n % 10) * ( n % 10);
@@ -350,14 +355,14 @@ int get_next(int n) {
     }
     return temp;
 }
-bool insHappy(int n) {
-    int p = n, q = n;
-    while(q != 1) {
-        p = get_next(p);
-        q = get_next(get_next(q));
-        if(p == q) break;
+bool insHappy(int n) { //双指针算法
+    int p = n, q = n;//刚开始将其都指向ｎ
+    while(q != 1) {//当ｑ为１的时候结束
+        p = get_next(p);//慢指针走一步
+        q = get_next(get_next(q));//快指针走２步
+        if(p == q) break;//当ｐ和ｑ相同时说明其中成环结束之
     }
-    return q == 1;
+    return q == 1;//因为ｑ总是在ｐ前面，所以要判断ｑ是否先等于１
 }
 ```
 
@@ -367,11 +372,14 @@ bool insHappy(int n) {
 
 删除链表中等于给定值 **val** 的所有节点。
 **示例:**
+
 ```
 输入: 1->2->6->3->4->5->6, val = 6
 输出: 1->2->3->4->5
 ```
 <font color = red>思路：整一个虚拟头，找到p->next是否等于所要删除的元素，此时ｐ为所要删除的前一个元素，将p->next删除就可以了 </font>
+
+![image.png](https://pic.leetcode-cn.com/79abd00de9bc8811483d019b86b1eafd7f3735800cc244012cde7b8a3d1dd751-image.png)
 
 ```cpp
 /**
@@ -383,14 +391,14 @@ bool insHappy(int n) {
  */
 struct ListNode* removeElements(struct ListNode* head, int val){
     struct ListNode ret, *p , *q;
-    ret.next = head;
-    p = &ret;
-    while(p && p->next) {
+    ret.next = head;// 虚拟头指向真正的头
+    p = &ret;//ｐ在虚拟头处
+    while(p && p->next) {//循环判断p->next ->val == val,如果找到则为所要删除元素的前一个元素
         if(p->next ->val== val) {
             q = p->next;
             p->next = q->next;
             free(q);
-        } else {
+        } else {//没找到继续往后走
             p = p->next;
         }
     }
@@ -398,7 +406,7 @@ struct ListNode* removeElements(struct ListNode* head, int val){
 }
 ```
 
-#### [206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+#### [206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)（头插法）
 
 难度简单781
 
@@ -422,7 +430,7 @@ struct ListNode* removeElements(struct ListNode* head, int val){
  *     struct ListNode *next;
  * };
  */
-
+//先将虚拟头质控，将p = head;头插法
 struct ListNode* reverseList(struct ListNode* head){
     if(head == NULL) return head;
     struct ListNode * p, *q, ret;
@@ -438,7 +446,7 @@ struct ListNode* reverseList(struct ListNode* head){
 }
 ```
 
-#### [234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
+#### [234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)（中分判回文）
 
 难度简单409收藏分享切换为英文关注反馈
 
@@ -472,14 +480,13 @@ struct ListNode* reverseList(struct ListNode* head){
  * };
  */
 
-int get_length(struct ListNode *head)
-{
+int get_length(struct ListNode *head) { //获取长度
     int n = 0;
     while(head)n+=1,head=head->next;
     return n;
 }
 
-struct ListNode *reverse(struct ListNode *head, int n) {
+struct ListNode *reverse(struct ListNode *head, int n) {//翻转后半部分
     struct ListNode ret, *p = head, *q;
     while(n--) p = p->next;
     ret.next = NULL;
@@ -494,7 +501,7 @@ struct ListNode *reverse(struct ListNode *head, int n) {
 bool isPalindrome(struct ListNode* head){
     int len = get_length(head);
     struct ListNode *p = head, *q = reverse(head, (len + 1 ) / 2);
-    while(q) {
+    while(q) {//同步比较
         if(p->val - q->val)return false;
         p=p->next;
         q=q->next;
@@ -503,7 +510,7 @@ return true;
 }
 ```
 
-#### [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)
+#### [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)（覆盖删除法）
 
 难度简单623
 
@@ -547,14 +554,14 @@ return true;
  * };
  */
 void deleteNode(struct ListNode* node) {
-    struct ListNode *t = node->next;
-    node->val = t->val;
-    node->next = t->next;
+    struct ListNode *t = node->next;//先记录所要删除点的下一个节点
+    node->val = t->val;//将其值付给所要删除的点
+    node->next = t->next;//删除下一个节点
     free(t);
 }
 ```
 
-#### [287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)
+#### [287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)（双指针算法找入口）
 
 难度中等433
 
@@ -611,5 +618,25 @@ int findDuplicate(int* nums, int numsSize){
     return p;
 }
 ```
-<font color =red>快慢指针寻找环入口法证明：</font><img src="https://static.dingtalk.com/media/lADPGoGu6sN4h9nNB43NCCw_2092_1933.jpg_620x10000q90g.jpg?auth_bizType=IM&amp;auth_bizEntity=%7B%22cid%22%3A%22627064533%3A627064533%22%2C%22msgId%22%3A%222541553216786%22%7D&amp;bizType=im&amp;open_id=627064533" alt="图片" style="zoom: 80%;" />
+## <font color =red>快慢指针寻找环入口法证明：</font><img src="https://static.dingtalk.com/media/lADPGoGu6sN4h9nNB43NCCw_2092_1933.jpg_620x10000q90g.jpg?auth_bizType=IM&amp;auth_bizEntity=%7B%22cid%22%3A%22627064533%3A627064533%22%2C%22msgId%22%3A%222541553216786%22%7D&amp;bizType=im&amp;open_id=627064533" alt="图片" style="zoom: 80%;" />
+
+
+
+
+
+### 链表操作摘要
+
+- 单链表插入、删除、查找
+- 单链表反转
+- 单链表反转从位置 m 到 n 的部分
+- 链表中环的检测
+- 合并两个有序的链表
+- 合并K个排序链表
+- 删除链表倒数第n个节点
+- 求链表的中间结点
+- 求链表环的入口节点
+- 两两交换链表中的节点
+- K 个一组翻转链表
+
+[https://github.com/Alex660/Algorithms-and-data-structures/blob/master/algo/%E9%93%BE%E8%A1%A8_linkedList.md](https://github.com/Alex660/Algorithms-and-data-structures/blob/master/algo/链表_linkedList.md)
 
