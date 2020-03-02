@@ -422,6 +422,22 @@ struct ListNode* removeElements(struct ListNode* head, int val){
 **进阶:**
 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
 
+![2020-03-02 20-52-43屏幕截图.png](https://pic.leetcode-cn.com/d54f88197bd13e0c64f620bac954c6aac4272a735d2781a11feb382399e5f6d4-2020-03-02%2020-52-43%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
+![2020-03-02 20-54-14屏幕截图.png](https://pic.leetcode-cn.com/2f6c398ada5d6864a820752157a8ec76d225e9aea4db273098b29dda98163dd5-2020-03-02%2020-54-14%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
+![2020-03-02 20-55-32屏幕截图.png](https://pic.leetcode-cn.com/b4a83db98c681affa11d754e8ae6ab06024543afc22bd872632d39634c1a4139-2020-03-02%2020-55-32%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
+![2020-03-02 20-59-05屏幕截图.png](https://pic.leetcode-cn.com/5bce74a773f46af4e712bf971a18b293508b4a9d075d899d97cfc88afc6828bb-2020-03-02%2020-59-05%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
+![2020-03-02 21-00-30屏幕截图.png](https://pic.leetcode-cn.com/5a6b658b7382cf84f54797ffe764f11894a6c7afec25e9385c11bdf76f25d618-2020-03-02%2021-00-30%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
+![2020-03-02 21-01-16屏幕截图.png](https://pic.leetcode-cn.com/98974482f57b2a16f00a988c501d0007d385e6327b406e2967281ef850c055d9-2020-03-02%2021-01-16%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
+![2020-03-02 21-02-03屏幕截图.png](https://pic.leetcode-cn.com/1c78d14bdb450e3d1f7470d7b7fc91e43fcba16ad57cbacc611b5a52ff947c56-2020-03-02%2021-02-03%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
+![2020-03-02 21-03-01屏幕截图.png](https://pic.leetcode-cn.com/66565d606a99e96cac1e8fc68b8a0db7ed4683c0ba9077dab44b6dea998d6b0f-2020-03-02%2021-03-01%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
 ```cpp
 /**
  * Definition for singly-linked list.
