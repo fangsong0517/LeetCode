@@ -1,20 +1,22 @@
 * [数据结构篇](#数据结构篇)
    * [二叉树](#二叉树)
-      * [<a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/" rel="nofollow">maximum-depth-of-binary-tree</a>](#maximum-depth-of-binary-tree)
-      * [<a href="https://leetcode-cn.com/problems/balanced-binary-tree/" rel="nofollow">balanced-binary-tree</a>](#balanced-binary-tree)
-      * [<a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/" rel="nofollow">binary-tree-maximum-path-sum</a>](#binary-tree-maximum-path-sum)
-      * [<a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/" rel="nofollow">lowest-common-ancestor-of-a-binary-tree</a>](#lowest-common-ancestor-of-a-binary-tree)
-      * [<a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/" rel="nofollow">binary-tree-level-order-traversal</a>](#binary-tree-level-order-traversal)
-      * [<a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/" rel="nofollow">binary-tree-level-order-traversal-ii</a>](#binary-tree-level-order-traversal-ii)
-      * [<a href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/" rel="nofollow">binary-tree-zigzag-level-order-traversal</a>](#binary-tree-zigzag-level-order-traversal)
-      * [<a href="https://leetcode-cn.com/problems/validate-binary-search-tree/" rel="nofollow">validate-binary-search-tree</a>](#validate-binary-search-tree)
-      * [<a href="https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/" rel="nofollow">insert-into-a-binary-search-tree</a>](#insert-into-a-binary-search-tree)
+      * [maximum-depth-of-binary-tree](#maximum-depth-of-binary-tree)
+      * [balanced-binary-tree](#balanced-binary-tree)
+      * [binary-tree-maximum-path-sum](#binary-tree-maximum-path-sum)
+      * [lowest-common-ancestor-of-a-binary-tree](#lowest-common-ancestor-of-a-binary-tree)
+      * [binary-tree-level-order-traversal](#binary-tree-level-order-traversal)
+      * [binary-tree-level-order-traversal-ii](#binary-tree-level-order-traversal-ii)
+      * [binary-tree-zigzag-level-order-traversal](#binary-tree-zigzag-level-order-traversal)
+      * [validate-binary-search-tree](#validate-binary-search-tree)
+      * [insert-into-a-binary-search-tree](#insert-into-a-binary-search-tree)
 
 ## 数据结构篇
 
 ### 二叉树
 
-#### [maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+#### maximum-depth-of-binary-tree
+
+[maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
 > 给定一个二叉树，找出其最大深度。
 
@@ -32,7 +34,9 @@ int maxDepth(struct TreeNode* root){
 }
 ```
 
-#### [balanced-binary-tree](https://leetcode-cn.com/problems/balanced-binary-tree/)
+#### balanced-binary-tree
+
+[balanced-binary-tree](https://leetcode-cn.com/problems/balanced-binary-tree/)
 
 >给定一个二叉树，判断它是否是高度平衡的二叉树。
 
@@ -56,7 +60,9 @@ bool isBalanced(struct TreeNode* root){
 }
 ```
 
-#### [binary-tree-maximum-path-sum](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
+#### binary-tree-maximum-path-sum
+
+[binary-tree-maximum-path-sum](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
 
 >给定一个**非空**二叉树，返回其最大路径和。
 
@@ -87,7 +93,9 @@ int maxPathSum(struct TreeNode* root){
 };
 ```
 
-#### [lowest-common-ancestor-of-a-binary-tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+#### lowest-common-ancestor-of-a-binary-tree
+
+[lowest-common-ancestor-of-a-binary-tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
 >给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
 
@@ -117,7 +125,9 @@ public:
 };
 ```
 
-#### [binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+#### binary-tree-level-order-traversal
+
+[binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
 
 >给你一个二叉树，请你返回其按 **层序遍历** 得到的节点值。 （即逐层地，从左到右访问所有节点）
 
@@ -147,7 +157,9 @@ public:
 };
 ```
 
-#### [binary-tree-level-order-traversal-ii](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)
+#### binary-tree-level-order-traversal-ii
+
+[binary-tree-level-order-traversal-ii](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)
 
 >给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
 
@@ -178,7 +190,9 @@ public:
 };
 ```
 
-#### [binary-tree-zigzag-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
+#### binary-tree-zigzag-level-order-traversal
+
+[binary-tree-zigzag-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
 
 >给定一个二叉树，返回其节点值的锯齿形层次遍历。Z 字形遍历
 
@@ -214,7 +228,9 @@ public:
 };
 ```
 
-#### [validate-binary-search-tree](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+#### validate-binary-search-tree
+
+[validate-binary-search-tree](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
 >给定一个二叉树，判断其是否是一个有效的二叉搜索树。
 
@@ -260,7 +276,9 @@ public:
 };
 ```
 
-#### [insert-into-a-binary-search-tree](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
+#### insert-into-a-binary-search-tree
+
+[insert-into-a-binary-search-tree](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
 
 >给定二叉搜索树（BST）的根节点和要插入树中的值，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。
 
