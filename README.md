@@ -311,3 +311,240 @@ public:
 };
 ```
 
+### 链表
+
+#### remove-duplicates-from-sorted-list
+
+[remove-duplicates-from-sorted-list](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
+
+>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+
+```c
+struct ListNode* deleteDuplicates(struct ListNode* head){
+        struct ListNode *p = head, *q;
+        while(p && p->next) {
+                if(p->val != p->next->val) {//不相同就一直往后走
+                        p = p->next;
+                } else {//相同时删除后面结点
+                        q = p->next;
+                        p->next = q->next;
+                        free(q);
+                }
+        }
+        return head;
+}
+```
+
+#### remove-duplicates-from-sorted-list-ii
+
+[remove-duplicates-from-sorted-list-ii](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)
+
+>给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 没有重复出现的数字。
+>
+>有可能把头删掉
+
+```c
+
+struct ListNode* deleteDuplicates(struct ListNode* head){
+        struct ListNode dummy;//虚拟头结点
+        dummy.next = head;
+        struct ListNode *p = &dummy;
+        while(p->next && p->next->next) {
+                if(p->next->val == p->next->next->val) {
+                        struct ListNode *q = p->next;
+                        while(q && q->next && q->val == q->next->val) {
+                                q = q->next;
+                        }
+                        p->next = q->next;
+                } else {
+                        p = p->next;
+                }
+        }
+        return dummy.next;
+}
+```
+
+#### reverse-linked-list
+
+[reverse-linked-list](https://leetcode-cn.com/problems/reverse-linked-list/)
+
+>反转一个单链表。
+
+```c++
+struct ListNode* reverseList(struct ListNode* head){
+    if(head == NULL) return NULL;
+    struct ListNode ret, *p, *q;
+    ret.next = NULL;
+    p = head;
+    while(p) {
+            q = p->next;
+            p->next = ret.next;
+            ret.next = p;
+            p = q;
+    }
+    return ret.next;
+}
+```
+
+#### reverse-linked-list-ii
+
+[reverse-linked-list-ii](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+
+>反转从位置 *m* 到 *n* 的链表。请使用一趟扫描完成反转。
+
+```c
+struct ListNode* reverseBetween(struct ListNode* head, int m, int n){
+        if(head== NULL) return NULL;
+        struct ListNode ret;
+        ret.next = head;
+        struct ListNode *p;
+        p = &ret;
+        for(int i = 1; i < m; i++){//先找到要翻转的起点前一个位置
+                p = p->next;
+        }
+        head = p->next;//因为不要返回ｈｅａｄ，所以这里可以直接利用ｈｅａｄ
+        for(int i = m; i < n; i++) {
+                struct ListNode *q = head->next;
+                head->next = q->next;
+                q->next = p->next;
+                p->next = q;
+        }
+        return ret.next;
+}
+```
+
+![image-20200731115124169](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20200731115124169.png)
+
+#### merge-two-sorted-lists
+
+[merge-two-sorted-lists](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+
+>将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+
+思路:使用ret连接各个元素.
+
+```c++
+
+struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
+        struct ListNode ret, *p = &ret;
+        ret.next = NULL;
+        while(l1 || l2) {//都为空的时候跳出
+                if(l2 == NULL || (l1 && l1->val <= l2->val)) {//l2为空，或者l1不为空且l1->val <= l2->val
+                        p->next = l1;
+                        l1= l1->next;
+                } else {//l1为空连接l2，或者l2不为空且l1->val > l2->val;
+                        p->next = l2;
+                        l2 = l2->next;
+                }
+                p = p->next;//ｐ往后走一个
+                p->next = NULL;//末未处理
+        }
+        return ret.next;
+}
+```
+
+#### partition-list
+
+**[partition-list](https://leetcode-cn.com/problems/partition-list/)**
+
+>给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 *x* 的节点都在大于或等于 *x* 的节点之前。
+
+思路：将大于 x 的节点，放到另外一个链表，最后连接这两个链表
+
+```c++
+struct ListNode* partition(struct ListNode* head, int x){
+        if(head == NULL) return head;
+        struct ListNode headLess, headGreater;
+        struct ListNode *curLess, *curGreater;
+        headLess.next = headGreater.next = NULL;
+        curLess = &headLess;
+        curGreater = &headGreater;
+
+        while(head) {
+                if(head->val < x) {
+                        curLess->next = head;
+                        curLess = curLess->next;
+                } else {
+                        curGreater->next = head;
+                        curGreater = curGreater->next;
+                }
+                head = head->next;
+        }
+        curGreater->next = NULL;
+        curLess->next = headGreater.next;
+        return headLess.next;
+}
+```
+
+#### sort-list 
+
+**[sort-list](https://leetcode-cn.com/problems/sort-list/)**
+
+>在 *O*(*n* log *n*) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+
+思路：归并排序，找中点和合并操作
+
+```c++
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        ListNode dummyHead(0);
+        dummyHead.next = head;
+        auto p = head;
+        int length = 0;
+        while (p) {
+            ++length;
+            p = p->next;
+        }
+        
+        for (int size = 1; size < length; size <<= 1) {
+            auto cur = dummyHead.next;
+            auto tail = &dummyHead;
+            
+            while (cur) {
+                auto left = cur;
+                auto right = cut(left, size); 
+                cur = cut(right, size); 
+                
+                tail->next = merge(left, right);
+                while (tail->next) {
+                    tail = tail->next;
+                }
+            }
+        }
+        return dummyHead.next;
+    }
+    
+    ListNode* cut(ListNode* head, int n) {
+        auto p = head;
+        while (--n && p) {
+            p = p->next;
+        }
+        
+        if (!p) return nullptr;
+        
+        auto next = p->next;
+        p->next = nullptr;
+        return next;
+    }
+    
+    ListNode* merge(ListNode* l1, ListNode* l2) {
+        ListNode dummyHead(0);
+        auto p = &dummyHead;
+        while (l1 && l2) {
+            if (l1->val < l2->val) {
+                p->next = l1;
+                p = l1;
+                l1 = l1->next;       
+            } else {
+                p->next = l2;
+                p = l2;
+                l2 = l2->next;
+            }
+        }
+        p->next = l1 ? l1 : l2;
+        return dummyHead.next;
+    }
+};
+```
+
