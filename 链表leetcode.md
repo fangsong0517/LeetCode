@@ -146,7 +146,44 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 }
 ```
 
+[[牛客]删除重复的结点](https://www.nowcoder.com/practice/fc533c45b73a41b0b44ccba763f866ef?tpId=13&&tqId=11209&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking)
 
+在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+
+```cpp
+/*
+struct ListNode {
+    int val;
+    struct ListNode *next;
+    ListNode(int x) :
+        val(x), next(NULL) {
+    }
+};
+*/
+class Solution {
+public:
+    ListNode* deleteDuplication(ListNode* pHead)
+    {
+        ListNode *first = new ListNode(-1);
+        first->next = pHead;
+        ListNode *p = pHead;
+        ListNode *last = first;
+        while(p && p->next) {
+            if(p->val == p->next->val) {
+                int val = p->val;
+                while(p && p->val == val) {
+                    p = p->next;
+                }
+                last->next = p;
+            } else {
+                last = p;
+                p = p->next;
+            }
+        }
+        return first->next;
+    }
+};
+```
 
 #### [141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)(双指针算法判环)
 
