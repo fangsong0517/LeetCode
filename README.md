@@ -10,11 +10,13 @@
       * [validate-binary-search-tree](#validate-binary-search-tree)
       * [insert-into-a-binary-search-tree](#insert-into-a-binary-search-tree)
 
+[TOC]
+
 ## 数据结构篇
 
 ### 二叉树
 
-#### maximum-depth-of-binary-tree
+#### maximum-depth-of-binary-tree[二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
 [maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
@@ -34,7 +36,7 @@ int maxDepth(struct TreeNode* root){
 }
 ```
 
-#### balanced-binary-tree
+#### balanced-binary-tree[平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
 
 [balanced-binary-tree](https://leetcode-cn.com/problems/balanced-binary-tree/)
 
@@ -60,7 +62,7 @@ bool isBalanced(struct TreeNode* root){
 }
 ```
 
-#### binary-tree-maximum-path-sum
+#### binary-tree-maximum-path-sum[二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
 
 [binary-tree-maximum-path-sum](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
 
@@ -93,7 +95,7 @@ int maxPathSum(struct TreeNode* root){
 };
 ```
 
-#### lowest-common-ancestor-of-a-binary-tree
+#### lowest-common-ancestor-of-a-binary-tree[二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
 [lowest-common-ancestor-of-a-binary-tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
@@ -125,7 +127,7 @@ public:
 };
 ```
 
-#### binary-tree-level-order-traversal
+#### binary-tree-level-order-traversal[二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
 
 [binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
 
@@ -157,7 +159,7 @@ public:
 };
 ```
 
-#### binary-tree-level-order-traversal-ii
+#### binary-tree-level-order-traversal-ii[二叉树的层次遍历 II](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)
 
 [binary-tree-level-order-traversal-ii](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)
 
@@ -190,7 +192,7 @@ public:
 };
 ```
 
-#### binary-tree-zigzag-level-order-traversal
+#### binary-tree-zigzag-level-order-traversal [二叉树的锯齿形层次遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
 
 [binary-tree-zigzag-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
 
@@ -228,7 +230,7 @@ public:
 };
 ```
 
-#### validate-binary-search-tree
+#### validate-binary-search-tree[ 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
 [validate-binary-search-tree](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
@@ -276,7 +278,7 @@ public:
 };
 ```
 
-#### insert-into-a-binary-search-tree
+#### insert-into-a-binary-search-tree[二叉搜索树中的插入操作](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
 
 [insert-into-a-binary-search-tree](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
 
@@ -313,7 +315,7 @@ public:
 
 ### 链表
 
-#### remove-duplicates-from-sorted-list
+#### remove-duplicates-from-sorted-list[ 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
 
 [remove-duplicates-from-sorted-list](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
 
@@ -335,7 +337,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 }
 ```
 
-#### remove-duplicates-from-sorted-list-ii
+#### remove-duplicates-from-sorted-list-ii[删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)
 
 [remove-duplicates-from-sorted-list-ii](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)
 
@@ -364,7 +366,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 }
 ```
 
-#### reverse-linked-list
+#### reverse-linked-list[反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
 [reverse-linked-list](https://leetcode-cn.com/problems/reverse-linked-list/)
 
@@ -386,7 +388,7 @@ struct ListNode* reverseList(struct ListNode* head){
 }
 ```
 
-#### reverse-linked-list-ii
+#### reverse-linked-list-ii[反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
 
 [reverse-linked-list-ii](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
 
@@ -415,7 +417,7 @@ struct ListNode* reverseBetween(struct ListNode* head, int m, int n){
 
 ![image-20200731115124169](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20200731115124169.png)
 
-#### merge-two-sorted-lists
+#### merge-two-sorted-list[合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
 [merge-two-sorted-lists](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
@@ -443,7 +445,7 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
 }
 ```
 
-#### partition-list
+#### partition-list[分隔链表](https://leetcode-cn.com/problems/partition-list/)
 
 **[partition-list](https://leetcode-cn.com/problems/partition-list/)**
 
@@ -476,7 +478,7 @@ struct ListNode* partition(struct ListNode* head, int x){
 }
 ```
 
-#### sort-list 
+#### sort-list [排序链表](https://leetcode-cn.com/problems/sort-list/)
 
 **[sort-list](https://leetcode-cn.com/problems/sort-list/)**
 
@@ -544,6 +546,209 @@ public:
         }
         p->next = l1 ? l1 : l2;
         return dummyHead.next;
+    }
+};
+```
+
+#### reorder-list [重排链表](https://leetcode-cn.com/problems/reorder-list/)
+
+>给定一个单链表 *L*：*L*→*L*→…→*L__n*→*L* 将其重新排列后变为： *L*→*L__n*→*L*→*L__n*→*L*→*L__n*→…
+
+双指针，l++, r--
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+       if(head == NULL) return;
+       vector<ListNode *>vec;
+       ListNode *p = head;
+       while(p) {
+           vec.push_back(p);
+           p = p ->next;
+       }
+       int l = 0, r = vec.size() - 1;
+       while(l < r) {
+           vec[l]->next = vec[r];
+           vec[r--]->next = vec[++l];//核心
+       } 
+       vec[l]->next = nullptr;
+    }
+};
+```
+
+#### linked-list-cycle[环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+
+> 给定一个链表，判断链表中是否有环。
+
+思路：快慢指针，快慢指针相同则有环
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(head == NULL) return false;
+        ListNode *p = head, *q = head;
+        do{
+            p = p->next;
+            q = q->next;
+            if(p == NULL || p->next == NULL) {
+                return false;
+            }
+            p = p->next;
+        }while(p != q);
+        return true;
+    }
+};
+```
+
+
+
+#### linked-list-cycle-ii [环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+
+> 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 `null`。
+
+思路：快慢指针，快慢相遇之后，慢指针回到头，快慢指针步调一致一起移动，相遇点即为入环点 
+
+![cycled_linked_list](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/cycled_linked_list.png)
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head == NULL) return NULL;
+        ListNode *p = head, *q = head;
+        do {
+            p = p->next;
+            q = q->next;
+            if(p == NULL || p->next == NULL) return NULL;
+            p = p->next;
+        }while(p != q);
+        p = head;
+        while(p != q) {
+            p = p->next;
+            q = q->next;
+        }
+        return p;
+    }
+}
+```
+
+#### palindrome-linked-list[ 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
+
+>请判断一个链表是否为回文链表。
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        stack<ListNode *>stk;
+        ListNode *q = head;
+        while(q) {
+            stk.push(q);
+            q = q->next;
+        }
+        q = head;
+        while(!stk.empty()) {
+            ListNode *temp = stk.top();
+            stk.pop();
+            if(temp->val != q->val) return false;
+            q = q->next;
+        }
+        return true;
+    }
+};
+```
+
+#### copy-list-with-random-pointer[复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)
+
+>给定一个链表，每个节点包含一个额外增加的随机指针，该指针可以指向链表中的任何节点或空节点。 要求返回这个链表的 深拷贝。
+
+思路：1、hash 表存储指针，2、复制节点跟在原节点后面
+
+```cpp
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+*/
+
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        if(head == NULL) return head;
+        Node *cur = head;
+        // 复制节点，紧挨到到后面
+    // 1->2->3  ==>  1->1'->2->2'->3->3'
+        while(cur) {
+            Node *clone = new Node(cur->val, cur->next, nullptr);
+            Node *temp = cur->next;
+            cur->next = clone;
+            cur = temp;
+        }
+        //处理random指针
+        cur = head;
+        while(cur) {
+            if(cur->random) {
+                cur->next->random = cur->random->next;
+            }
+            cur = cur->next->next;
+        }
+        // 分离两个链表
+        cur = head;
+        Node *ret = head->next;
+        while(cur->next) {
+            Node *temp = cur->next;
+            cur->next = cur->next->next;
+            cur = temp;
+        }
+    // 原始链表头：head 1->2->3
+    // 克隆的链表头：cloneHead 1'->2'->3'
+        return ret;
     }
 };
 ```
