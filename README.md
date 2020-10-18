@@ -753,3 +753,396 @@ public:
 };
 ```
 
+### 栈和队列
+
+#### min-stack [最小栈](https://leetcode-cn.com/problems/min-stack/)
+
+> 设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+
+思路：用两个栈实现，一个最小栈始终保证最小值在顶部，一个栈保存原，一个栈保存最小栈顶
+
+```cpp
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    stack<int>stk1, stk2;
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        stk1.push(x);
+        if(stk2.empty() || x <= stk2.top()) {
+            stk2.push(x);
+        }
+    }
+    
+    void pop() {
+        if(stk2.top() == stk1.top()) {
+            stk2.pop();
+        }
+        stk1.pop();
+    }
+    
+    int top() {
+        return stk1.top();
+    }
+    
+    int getMin() {
+        return stk2.top();
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
+```
+
+#### evaluate-reverse-polish-notation[逆波兰表达式求值](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)
+
+> **波兰表达式计算** > **输入:** `["2", "1", "+", "3", "*"]` > **输出:** 9
+>
+> **解释:** `((2 + 1) * 3) = 9`
+
+思路：通过栈保存原来的元素，遇到表达式弹出运算，再推入结果，重复这个过程
+
+```cpp
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) { 
+        stack<int>t;
+        for(int i = 0; i < tokens.size(); i++) {
+            if(tokens[i]=="+" || tokens[i] == "-"|| tokens[i] == "*"|| tokens[i] == "/"){
+                    if(t.size() < 2) {
+                        return -1;
+                    }
+                    int b = t.top();
+                    t.pop();
+                    int a = t.top();
+                    t.pop();
+                    int ret = 0;
+                    if(tokens[i] == "+")ret = a + b;
+                    if(tokens[i] == "-")ret = a - b;
+                    if(tokens[i] == "*")ret = a * b;
+                    if(tokens[i] == "/")ret = a / b;
+                    t.push(ret);
+            } else {
+                int w = atoi(tokens[i].c_str());
+                t.push(w);
+            }
+        }
+        return t.top();
+    }
+};
+```
+
+#### decode-string[字符串解码](https://leetcode-cn.com/problems/decode-string/)
+
+>给定一个经过编码的字符串，返回它解码后的字符串。 s = "3[a]2[bc]", 返回 "aaabcbc". s = "3[a2[c]]", 返回 "accaccacc". s = "2[abc]3[cd]ef", 返回 "abcabccdcdcdef".
+
+思路：通过栈辅助进行操作
+
+```cpp
+class Solution {
+public:
+    string decodeString(string s) {
+        stack<int>numstk;
+        stack<string>strstk;
+        string cur = "";
+        string result = "";
+        int n = s.size();
+        int num = 0;
+        for(int i = 0; i < n; i++) {
+            if(s[i] >= '0' && s[i] <= '9') {
+                num = num * 10 + s[i] - '0';
+            } else if(s[i] == '['){
+                numstk.push(num);
+                strstk.push(cur);
+                num = 0;
+                cur.clear();
+            } else if((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')) cur += s[i];
+            else if(s[i] == ']') {
+                int k = numstk.top();
+                numstk.pop();
+                for(int j = 0; j < k; j++) {
+                    strstk.top() += cur;
+                }
+                cur = strstk.top();
+                strstk.pop();
+            }
+        }
+        result = result + cur;
+        return result;
+    }
+};
+```
+
+#### binary-tree-inorder-traversal[二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> ret;
+    void inorder(TreeNode *root) {
+        if(root == NULL) return;
+        if(root->left) inorder(root->left);
+        ret.push_back(root->val);
+        if(root->right) inorder(root->right);    
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        if(root == NULL) return ret;
+        inorder(root);
+        return ret;
+    }
+};
+```
+
+#### clone-graph[克隆图](https://leetcode-cn.com/problems/clone-graph/)
+
+> 给你无向连通图中一个节点的引用，请你返回该图的深拷贝（克隆）。
+
+
+
+```cpp
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> neighbors;
+    
+    Node() {
+        val = 0;
+        neighbors = vector<Node*>();
+    }
+    
+    Node(int _val) {
+        val = _val;
+        neighbors = vector<Node*>();
+    }
+    
+    Node(int _val, vector<Node*> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+};
+*/
+
+class Solution {
+public:
+    Node* visit[101] = {nullptr};
+    Node* cloneGraph(Node* node) {
+        if(node == NULL) return node;
+        int n = node->neighbors.size();
+        Node *root = new Node(node->val, vector<Node *>());
+        visit[node->val] = root;
+        for(int i = 0; i < n; i++) {
+            if(!visit[node->neighbors[i]->val]) {
+                root->neighbors.push_back(cloneGraph(node->neighbors[i]));
+            } else {
+                root->neighbors.push_back(visit[node->neighbors[i]->val]);
+            }
+        }
+        return root;
+    }
+};
+```
+
+#### number-of-islands[岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+
+> 给定一个由 '1'（陆地）和 '0'（水）组成的的二维网格，计算岛屿的数量。一个岛被水包围，并且它是通过水平方向或垂直方向上相邻的陆地连接而成的。你可以假设网格的四个边均被水包围。
+
+```cpp
+class Solution {
+public:
+    char a[310][310];
+    int check[310][310];
+    int dir[4][2] = {1, 0, 0, 1, -1, 0, 0, -1};
+    void dfs(int x, int y) {
+        for(int i = 0; i < 4; i++) {
+            int dx = x + dir[i][0];
+            int dy = y + dir[i][1];
+            if(a[dx][dy] == '1') {
+                a[dx][dy] = '0';
+                dfs(dx, dy);
+            }
+        }
+        return;
+    }
+    int numIslands(vector<vector<char>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                a[i + 1][j + 1] = grid[i][j];
+            }
+        }
+        int sum = 0;
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= m; j++) {
+                if(a[i][j] == '1') {
+                    sum++;
+                    a[i][j] = '0';
+                    dfs(i, j);
+                }
+            }
+        }
+        return sum;
+    }
+};
+```
+
+
+
+#### largest-rectangle-in-histogram[柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+
+>给定 *n* 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。 求在该柱状图中，能够勾勒出来的矩形的最大面积。
+
+基本思想：单调栈，单调递增栈的作用就是为了以栈顶元素为中心，向两边延伸找到小于栈顶元素的左右边界。时间复杂度O(n)空间复杂度O(n)。
+
+- 当前heights[i]元素大于栈顶，则元素入栈，否则开始计算以栈顶元素为矩形的高往两侧延伸
+- 直到遇到左右两侧第一个比这个矩形条的高度更小的矩形条，此时以栈顶元素为矩形的宽度就是该矩形最大宽度
+- 寻找右边界，很明显，就是当前heights[i]元素右边界为i，如果heights[i]大于等于栈顶元素就入栈了
+- 寻找左边界，显然就是栈顶下一个元素，如果栈顶没有下一个元素，说明栈顶元素是整个前i个元素最小的了，左边界就是-1
+- 只要当前heights[i]元素小于栈顶元素或者i已经到底了，就计算以栈顶元素为矩形的高情况下矩形最大面积，确定左右边界
+
+```cpp
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        heights.push_back(0);
+        int sum = 0;
+        int n = heights.size();
+        stack<int>stk;
+        for(int i = 0; i < n; i++) {
+            while(!stk.empty() && heights[stk.top()] > heights[i]) {
+                int h = heights[stk.top()];
+                stk.pop();
+                sum = max(sum, h * (stk.empty() ? i : i - stk.top() - 1));
+            }
+            stk.push(i);
+        }
+        return sum;
+    }
+};
+```
+
+#### implement-queue-using-stacks[用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
+
+```cpp
+class MyQueue {
+public:
+stack<int>stk1;
+stack<int>stk2;
+    /** Initialize your data structure here. */
+    MyQueue() {
+
+    }
+    /** Push element x to the back of queue. */
+    void push(int x) {
+        stk1.push(x);
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    int pop() {
+        while(!stk1.empty()) {
+            stk2.push(stk1.top());
+            stk1.pop();
+        }
+        int w = stk2.top();
+        stk2.pop();
+        while(!stk2.empty()) {
+            stk1.push(stk2.top());
+            stk2.pop();
+        }
+        return w;
+    }
+    
+    /** Get the front element. */
+    int peek() {
+        while(!stk1.empty()) {
+            stk2.push(stk1.top());
+            stk1.pop();
+        }
+        int w = stk2.top();
+        while(!stk2.empty()) {
+            stk1.push(stk2.top());
+            stk2.pop();
+        }
+        return w;
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return stk1.size() == 0;
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
+```
+
+#### 01-mtrix[01 矩阵](https://leetcode-cn.com/problems/01-matrix/)
+
+>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。 两个相邻元素间的距离为 1
+
+  BFS
+
+```cpp
+struct node{
+    int x, y, z;
+};
+class Solution {
+public:
+    int dir[4][2] = {1, 0, 0, 1, -1, 0, 0, -1};
+    vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
+        queue<node>q;
+        int n = matrix.size();
+        int m = matrix[0].size();
+        vector<vector<int>> vis(n, vector<int>(m, 0));
+        vector<vector<int>> ret(n, vector<int>(m, 0));
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j ++) {
+                if(matrix[i][j] == 0) q.push({i, j, 0}), vis[i][j] = 1;
+            }
+        }
+        while(!q.empty()) {
+            node temp = q.front();
+            q.pop();
+            vis[temp.x][temp.y] = 1;
+            for(int i = 0; i < 4; i++) {
+                int dx = temp.x + dir[i][0];
+                int dy = temp.y + dir[i][1];
+                if(dx < 0 || dy < 0 || dx >= n || dy >= m || vis[dx][dy]) continue;
+                q.push(node{dx, dy, temp.z + 1});
+                ret[dx][dy] = temp.z + 1;
+                vis[dx][dy] = 1;
+            }
+        }
+        return ret;
+    }
+};
+```
+
