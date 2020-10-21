@@ -1345,3 +1345,241 @@ public:
 };
 ```
 
+### 二分搜索
+
+![img](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/binary_search_template.png)
+
+#### binary-search[二分查找](https://leetcode-cn.com/problems/binary-search/)
+
+>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
+
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int l = 0, r = nums.size() - 1;
+        while(l <= r) {
+            int mid = (l + r) >> 1;
+            if(nums[mid] > target) r = mid - 1;
+            else if(nums[mid] < target) l = mid + 1;
+            else return mid;
+        }
+        return -1;
+    }
+};
+```
+
+#### search-insert-position[搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/)
+
+>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+
+```cpp
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int l = 0, r = nums.size() - 1;
+        while(l <= r) {
+            int mid = (l + r) >> 1;
+            if(nums[mid] == target) {
+                return mid;
+            } else if(nums[mid] > target){
+                r = mid - 1;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return l;
+    }
+};
+```
+
+#### search-a-2d-matrix[搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)
+
+>编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
+>
+>- 每行中的整数从左到右按升序排列。
+>- 每行的第一个整数大于前一行的最后一个整数。
+
+```cpp
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        if(matrix.size() == 0) return false;
+        int n = matrix.size();
+        int m = matrix[0].size();
+        int l = n - 1;
+        int r = 0;
+        while(l >= 0 && l < n && r >= 0 && r < m) {
+            if(matrix[l][r] > target) {
+                l --;
+            } else if(matrix[l][r] < target) {
+                r ++;
+            } else if(matrix[l][r] == target){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+```
+
+#### first-bad-version[第一个错误的版本](https://leetcode-cn.com/problems/first-bad-version/)
+
+>假设你有 n 个版本 [1, 2, ..., n]，你想找出导致之后所有版本出错的第一个错误的版本。 你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。
+
+```cpp
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
+class Solution {
+public:
+    int firstBadVersion(int n) {
+       long long l = 1, r = n;
+       while(l < r) {
+           long long mid = (l + r) >> 1;
+           if(isBadVersion(mid)) {
+               r = mid;
+           } else {
+               l = mid + 1;
+           }
+       }
+       return l;
+    }
+};
+```
+
+#### find-minimum-in-rotated-sorted-array[寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)
+
+>假设按照升序排序的数组在预先未知的某个点上进行了旋转( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。 请找出其中最小的元素。
+
+```cpp
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        if(nums.size() == 0) return -1;
+        int l = 0, r = nums.size() - 1;
+        while(l + 1 < r) {
+            int mid = (l + r) >> 1;
+            if(nums[mid] <= nums[r]) {
+                r = mid;
+            } else {
+                l = mid;
+            } 
+        }
+        if(nums[l] > nums[r]) {
+            return nums[r];
+        }
+        return nums[l];
+    }
+};
+```
+
+#### find-minimum-in-rotated-sorted-array-ii[寻找旋转排序数组中的最小值 II](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/)
+
+> 假设按照升序排序的数组在预先未知的某个点上进行了旋转 ( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。 请找出其中最小的元素。(包含重复元素)
+
+```cpp
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        if(nums.size() == 0) return -1;
+        int l = 0, r = nums.size() - 1;
+        while(l + 1 < r) {
+            while(l < r && nums[r] == nums[r - 1]) {//去除重复元素
+                r --;
+            }
+            while(l < r && nums[l] == nums[l + 1]) {//去除重复元素
+                l ++;
+            }
+            int mid = (l + r) >> 1;
+            if(nums[mid] <= nums[r]) {
+                r = mid;
+            } else {
+                l = mid;
+            } 
+        }
+        if(nums[l] > nums[r]) {
+            return nums[r];
+        }
+        return nums[l];
+    }
+};
+```
+
+#### search-in-rotated-sorted-array[搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+
+> 假设按照升序排序的数组在预先未知的某个点上进行了旋转。 ( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。 搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。 你可以假设数组中不存在重复的元素。
+
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int l = 0, r = nums.size() - 1;
+        while(l + 1 < r) {
+            int mid = (l + r) >> 1;
+            if(nums[mid] == target) return mid;
+            if(nums[l] < nums[mid]) {
+                if(nums[l] <= target && target <= nums[mid]) {
+                    r = mid;
+                } else {
+                    l = mid;
+                }
+            } else if(nums[r] > nums[mid]){
+                if(nums[r] >= target && target >= nums[mid]) {
+                    l = mid;
+                } else {
+                    r = mid;
+                }
+            }
+        }
+        if(nums[l] == target) {
+            return l;
+        } else if(nums[r] == target) {
+            return r;
+        }
+        return  -1;
+    }
+};
+```
+
+#### search-in-rotated-sorted-array-ii[搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/)
+
+>假设按照升序排序的数组在预先未知的某个点上进行了旋转。 ( 例如，数组 [0,0,1,2,2,5,6] 可能变为 [2,5,6,0,0,1,2] )。 编写一个函数来判断给定的目标值是否存在于数组中。若存在返回 true，否则返回 false。(包含重复元素)
+
+```cpp
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        if(nums.size() == 0) return false;
+       int l = 0, r = nums.size() - 1;
+       while(l + 1 < r) {
+           int mid = (l + r) >> 1;
+           while(l < r && nums[r] == nums[r - 1]) {//去重
+               r --;
+           }
+           while(l < r && nums[l] == nums[l + 1]) {
+               l ++;
+           }
+           if(nums[mid] == target) return true;
+           if(nums[mid] > nums[l]) {
+               if(nums[l] <= target && target <= nums[mid]) {
+                   r = mid;
+               } else {
+                   l = mid;
+               }
+           } else if(nums[r] > nums[mid]){
+               if(nums[r] >= target && target >= nums[mid]) {
+                   l = mid;
+               } else {
+                   r = mid;
+               }
+           }
+       } 
+       if(nums[l] == target || nums[r] == target) {
+           return true;
+       }
+       return false;
+    }
+};
+```
+
