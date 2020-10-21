@@ -1583,3 +1583,84 @@ public:
 };
 ```
 
+### 动态规划
+
+#### **背景**
+
+先从一道题目开始~
+
+如题 [triangle](https://leetcode-cn.com/problems/triangle/)
+
+> 给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
+
+例如，给定三角形：
+
+```cpp
+[
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+```
+
+自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
+
+使用 DFS（遍历 或者 分治法）
+
+遍历
+
+![img](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/dp_triangle.png)
+
+分治法
+
+![img](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/dp_dc.png)
+
+优化 DFS，缓存已经被计算的值（称为：记忆化搜索 本质上：动态规划）
+
+![img](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/dp_memory_search.png)
+
+动态规划就是把大问题变成小问题，并解决了小问题重复计算的方法称为动态规划
+
+动态规划和 DFS 区别
+
+- 二叉树 子问题是没有交集，所以大部分二叉树都用递归或者分治法，即 DFS，就可以解决
+- 像 triangle 这种是有重复走的情况，**子问题是有交集**，所以可以用动态规划来解决
+
+动态规划，自底向上
+
+```cpp
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        int n = triangle.size();
+        for(int i = n - 2; i >= 0; i--) {
+            for(int j = 0; j <= i; j++) {
+                triangle[i][j] = min(triangle[i + 1][j], triangle[i + 1][j + 1]) + triangle[i][j];
+            }
+        }
+        return triangle[0][0];
+    }
+};
+```
+
+#### 使用场景
+
+满足两个条件
+
+- 满足以下条件之一
+  - 求最大/最小值（Maximum/Minimum ）
+  - 求是否可行（Yes/No ）
+  - 求可行个数（Count(*) ）
+- 满足不能排序或者交换（Can not sort / swap ）
+
+#### 四点要素
+
+1. **状态 State**
+   - 灵感，创造力，存储小规模问题的结果
+2. 方程 Function
+   - 状态之间的联系，怎么通过小的状态，来算大的状态
+3. 初始化 Intialization
+   - 最极限的小状态是什么, 起点
+4. 答案 Answer
+   - 最大的那个状态是什么，终点
