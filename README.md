@@ -1664,3 +1664,141 @@ public:
    - 最极限的小状态是什么, 起点
 4. 答案 Answer
    - 最大的那个状态是什么，终点
+
+#### 常见四种类型
+
+1. Matrix DP (10%)
+2. Sequence (40%)
+3. Two Sequences DP (40%)
+4. Backpack (10%)
+
+注意点
+
+- 贪心算法大多题目靠背答案，所以如果能用动态规划就尽量用动规，不用贪心算法
+
+#### 1、矩阵类型（10%）
+
+#### minimum-path-sum[最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+
+> 给定一个包含非负整数的 *m* x *n* 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+
+```cpp
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>>f(n, vector<int>(m, 0));
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                if(i == 0 && j != 0) {
+                    f[i][j] += f[i][j - 1] +grid[i][j]; 
+                } else if(j == 0 && i != 0) {
+                    f[i][j] += f[i - 1][j] + grid[i][j];
+                } else if(i == 0 && j == 0) f[i][j] = grid[i][j];
+                else f[i][j] += min(f[i - 1][j], f[i][j - 1]) + grid[i][j];
+            }
+        }
+        return f[n - 1][m - 1];
+    }
+};
+```
+
+#### unique-paths[不同路径](https://leetcode-cn.com/problems/unique-paths/)
+
+>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。 问总共有多少条不同的路径？
+
+```cpp
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector<vector<int>>f(n, vector<int>(m, 1));
+        for(int i = 1; i < n; i++) {
+            for(int j = 1; j < m; j++) {
+                f[i][j] = f[i - 1][j] + f[i][j - 1];
+            }
+        }
+        return f[n - 1][m - 1];
+    }
+};
+```
+
+#### unique-paths-ii[不同路径 II](https://leetcode-cn.com/problems/unique-paths-ii/)
+
+>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。 问总共有多少条不同的路径？ 现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？
+
+```cpp
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        if(obstacleGrid[0][0] == 1) return 0;
+        int n = obstacleGrid.size();
+        int m = obstacleGrid[0].size();
+        vector<vector<int>>f(n, vector<int>(m, 1));
+        for(int i = 1; i < n; i++) {
+            if(obstacleGrid[i][0] == 1 || f[i - 1][0] == 0) {
+                f[i][0] = 0;
+            }
+        }
+        for(int j = 1; j < m; j++) {
+            if(obstacleGrid[0][j] == 1 || f[0][j - 1] == 0) {
+                f[0][j] = 0;
+            }
+        }
+        for(int i = 1; i < n; i++) {
+            for(int j = 1; j < m; j++) {
+                if(obstacleGrid[i][j] == 1) {
+                    f[i][j] = 0;
+                } else {
+                    f[i][j] = f[i - 1][j] + f[i][j - 1];
+                }
+            }
+        }
+        return f[n - 1][m - 1];
+    }
+};
+```
+
+#### 2、序列类型（40%）
+
+#### climbing-stairs[爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
+
+> 假设你正在爬楼梯。需要 *n* 阶你才能到达楼顶。
+
+```cpp
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n == 1 || n == 0) return n;
+        vector<int>f(n + 1, 0);
+        f[1] = 1;
+        f[2] = 2;
+        for(int i = 3; i <= n; i++) {
+            f[i] = f[i - 1] + f[i - 2];
+        }
+        return f[n];
+    }
+};
+```
+
+#### jump-game[跳跃游戏](https://leetcode-cn.com/problems/jump-game/)
+
+>给定一个非负整数数组，你最初位于数组的第一个位置。 数组中的每个元素代表你在该位置可以跳跃的最大长度。 判断你是否能够到达最后一个位置。
+
+```cpp
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int w = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            if(i > w) return false;
+            w = max(w, i + nums[i]);
+        }
+        return true;
+    }
+};
+```
+
+#### jump-game-ii[跳跃游戏 II](https://leetcode-cn.com/problems/jump-game-ii/)
+
+> 给定一个非负整数数组，你最初位于数组的第一个位置。 数组中的每个元素代表你在该位置可以跳跃的最大长度。 你的目标是使用最少的跳跃次数到达数组的最后一个位置。
