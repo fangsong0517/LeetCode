@@ -1855,3 +1855,120 @@ public:
 
 
 
+#### longest-increasing-subsequence[最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+
+>  给定一个无序的整数数组，找到其中最长上升子序列的长度。
+
+```cpp
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0) return 0;
+        vector<int>f(n, 1);
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j < i; j++) {
+                if(nums[i] > nums[j])f[i] = max(f[i], f[j] + 1);
+            }
+        }
+        int mmax = 0;
+        for(int i = 0; i < n; i++) {
+            mmax = max(mmax, f[i]);
+        }
+        return mmax;
+    }
+};
+```
+
+#### word-break[单词拆分](https://leetcode-cn.com/problems/word-break/)
+
+>给定一个**非空**字符串 *s* 和一个包含**非空**单词列表的字典 *wordDict*，判定 *s* 是否可以被空格拆分为一个或多个在字典中出现的单词。
+
+未优化：
+
+```cpp
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<bool>dp(s.size() + 1, false);
+        unordered_set<string> m(wordDict.begin(), wordDict.end());
+        dp[0] = true;
+        for(int i = 1; i <= s.size(); i++) {
+            for(int j = 0; j < i; j++) {
+                if(dp[j] && m.find(s.substr(j, i - j)) != m.end()) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.size()];
+    }
+};
+```
+
+优化：
+
+```cpp
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<bool>dp(s.size() + 1, false);
+        unordered_set<string> m(wordDict.begin(), wordDict.end());
+        dp[0] = true;
+        int mmax = 0;
+        for(int i = 0; i < wordDict.size(); i++) {
+            mmax = max(mmax, (int)wordDict[i].size());
+        }
+        for(int i = 1; i <= s.size(); i++) {
+            for(int j = max(i - mmax, 0); j < i; j++) {//没必要每次都从0开始，i - mmax前都没用
+                if(dp[j] && m.find(s.substr(j, i - j)) != m.end()) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.size()];
+    }
+};
+```
+
+![image-20201024191128474](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201024191128474.png)
+
+
+
+#### 小结
+
+常见处理方式是给 0 位置占位，这样处理问题时一视同仁，初始化则在原来基础上 length+1，返回结果 f[n]
+
+- 状态可以为前 i 个
+- 初始化 length+1
+- 取值 index=i-1
+- 返回值：`f[n]`或者` f[m][n]`
+
+#### 3. Two Sequences DP（40%）
+
+#### longest-common-subsequence[最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)
+
+> 给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列。 一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。 例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。
+
+```cpp
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+        int n = text1.size();
+        int m = text2.size();
+        vector<vector<int> >f(n + 1, vector<int>(m + 1, 0));
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= m; j++) {
+                if(text1[i - 1] == text2[j - 1]) {
+                    f[i][j] = f[i - 1][j - 1] + 1;
+                } else {
+                    f[i][j] = max(f[i][j - 1], f[i - 1][j]);
+                }
+            }
+        }
+        return f[n][m];
+    }
+};
+```
+
