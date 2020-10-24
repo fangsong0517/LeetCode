@@ -1955,6 +1955,13 @@ public:
 class Solution {
 public:
     int longestCommonSubsequence(string text1, string text2) {
+    // dp[i][j] a前i个和b前j个字符最长公共子序列
+    // dp[m+1][n+1]
+    //   ' a d c e
+    // ' 0 0 0 0 0
+    // a 0 1 1 1 1
+    // c 0 1 1 2 1
+    //
         int n = text1.size();
         int m = text2.size();
         vector<vector<int> >f(n + 1, vector<int>(m + 1, 0));
@@ -1979,6 +1986,8 @@ public:
 #### edit-distance[编辑距离](https://leetcode-cn.com/problems/edit-distance/)
 
 > 给你两个单词 word1 和 word2，请你计算出将 word1 转换成 word2 所使用的最少操作数 你可以对一个单词进行如下三种操作： 插入一个字符 删除一个字符 替换一个字符
+
+![image-20201024225058628](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201024225058628.png)
 
 ```cpp
 class Solution {
@@ -2006,4 +2015,38 @@ public:
     }
 };
 ```
+
+思路：和上题很类似，相等则不需要操作，否则取删除、插入、替换最小操作次数的值+1
+
+#### 4.零钱和背包（10%）
+
+#### coin-change[零钱兑换](https://leetcode-cn.com/problems/coin-change/)
+
+> 给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
+
+思路：和其他 DP 不太一样，i 表示钱或者容量
+
+```cpp
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        vector<int>dp(amount + 1, 0);
+        int n = coins.size();
+        dp[0] = 0;
+        for(int i = 1; i <= amount; i++) {
+            dp[i] = 0x3f3f3f3f;
+            for(int j = 0; j < n; j++) {
+                if(coins[j] <= i) {
+                    dp[i] = min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+        return dp[amount] == 0x3f3f3f3f ? -1 : dp[amount];
+    }
+};
+```
+
+注意
+
+> dp[i-a[j]] 决策 a[j]是否参与
 
