@@ -1,16 +1,80 @@
+[TOC]
+
+
+
 * [数据结构篇](#数据结构篇)
    * [二叉树](#二叉树)
-      * [maximum-depth-of-binary-tree](#maximum-depth-of-binary-tree)
-      * [balanced-binary-tree](#balanced-binary-tree)
-      * [binary-tree-maximum-path-sum](#binary-tree-maximum-path-sum)
-      * [lowest-common-ancestor-of-a-binary-tree](#lowest-common-ancestor-of-a-binary-tree)
-      * [binary-tree-level-order-traversal](#binary-tree-level-order-traversal)
-      * [binary-tree-level-order-traversal-ii](#binary-tree-level-order-traversal-ii)
-      * [binary-tree-zigzag-level-order-traversal](#binary-tree-zigzag-level-order-traversal)
-      * [validate-binary-search-tree](#validate-binary-search-tree)
-      * [insert-into-a-binary-search-tree](#insert-into-a-binary-search-tree)
-
-[TOC]
+      * [maximum-depth-of-binary-tree<a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/" rel="nofollow">二叉树的最大深度</a>](#maximum-depth-of-binary-tree二叉树的最大深度)
+      * [balanced-binary-tree<a href="https://leetcode-cn.com/problems/balanced-binary-tree/" rel="nofollow">平衡二叉树</a>](#balanced-binary-tree平衡二叉树)
+      * [binary-tree-maximum-path-sum<a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/" rel="nofollow">二叉树中的最大路径和</a>](#binary-tree-maximum-path-sum二叉树中的最大路径和)
+      * [lowest-common-ancestor-of-a-binary-tree<a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/" rel="nofollow">二叉树的最近公共祖先</a>](#lowest-common-ancestor-of-a-binary-tree二叉树的最近公共祖先)
+      * [binary-tree-level-order-traversal<a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/" rel="nofollow">二叉树的层序遍历</a>](#binary-tree-level-order-traversal二叉树的层序遍历)
+      * [binary-tree-level-order-traversal-ii<a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/" rel="nofollow">二叉树的层次遍历 II</a>](#binary-tree-level-order-traversal-ii二叉树的层次遍历-ii)
+      * [binary-tree-zigzag-level-order-traversal <a href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/" rel="nofollow">二叉树的锯齿形层次遍历</a>](#binary-tree-zigzag-level-order-traversal-二叉树的锯齿形层次遍历)
+      * [validate-binary-search-tree<a href="https://leetcode-cn.com/problems/validate-binary-search-tree/" rel="nofollow"> 验证二叉搜索树</a>](#validate-binary-search-tree-验证二叉搜索树)
+      * [insert-into-a-binary-search-tree<a href="https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/" rel="nofollow">二叉搜索树中的插入操作</a>](#insert-into-a-binary-search-tree二叉搜索树中的插入操作)
+   * [链表](#链表)
+      * [remove-duplicates-from-sorted-list<a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/" rel="nofollow"> 删除排序链表中的重复元素</a>](#remove-duplicates-from-sorted-list-删除排序链表中的重复元素)
+      * [remove-duplicates-from-sorted-list-ii<a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/" rel="nofollow">删除排序链表中的重复元素 II</a>](#remove-duplicates-from-sorted-list-ii删除排序链表中的重复元素-ii)
+      * [reverse-linked-list<a href="https://leetcode-cn.com/problems/reverse-linked-list/" rel="nofollow">反转链表</a>](#reverse-linked-list反转链表)
+      * [reverse-linked-list-ii<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/" rel="nofollow">反转链表 II</a>](#reverse-linked-list-ii反转链表-ii)
+      * [merge-two-sorted-list<a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/" rel="nofollow">合并两个有序链表</a>](#merge-two-sorted-list合并两个有序链表)
+      * [partition-list<a href="https://leetcode-cn.com/problems/partition-list/" rel="nofollow">分隔链表</a>](#partition-list分隔链表)
+      * [sort-list <a href="https://leetcode-cn.com/problems/sort-list/" rel="nofollow">排序链表</a>](#sort-list-排序链表)
+      * [reorder-list <a href="https://leetcode-cn.com/problems/reorder-list/" rel="nofollow">重排链表</a>](#reorder-list-重排链表)
+      * [linked-list-cycle<a href="https://leetcode-cn.com/problems/linked-list-cycle/" rel="nofollow">环形链表</a>](#linked-list-cycle环形链表)
+      * [linked-list-cycle-ii <a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/" rel="nofollow">环形链表 II</a>](#linked-list-cycle-ii-环形链表-ii)
+      * [palindrome-linked-list<a href="https://leetcode-cn.com/problems/palindrome-linked-list/" rel="nofollow"> 回文链表</a>](#palindrome-linked-list-回文链表)
+      * [copy-list-with-random-pointer<a href="https://leetcode-cn.com/problems/copy-list-with-random-pointer/" rel="nofollow">复制带随机指针的链表</a>](#copy-list-with-random-pointer复制带随机指针的链表)
+   * [栈和队列](#栈和队列)
+      * [min-stack <a href="https://leetcode-cn.com/problems/min-stack/" rel="nofollow">最小栈</a>](#min-stack-最小栈)
+      * [evaluate-reverse-polish-notation<a href="https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/" rel="nofollow">逆波兰表达式求值</a>](#evaluate-reverse-polish-notation逆波兰表达式求值)
+      * [decode-string<a href="https://leetcode-cn.com/problems/decode-string/" rel="nofollow">字符串解码</a>](#decode-string字符串解码)
+      * [binary-tree-inorder-traversal<a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/" rel="nofollow">二叉树的中序遍历</a>](#binary-tree-inorder-traversal二叉树的中序遍历)
+      * [clone-graph<a href="https://leetcode-cn.com/problems/clone-graph/" rel="nofollow">克隆图</a>](#clone-graph克隆图)
+      * [number-of-islands<a href="https://leetcode-cn.com/problems/number-of-islands/" rel="nofollow">岛屿数量</a>](#number-of-islands岛屿数量)
+      * [largest-rectangle-in-histogram<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/" rel="nofollow">柱状图中最大的矩形</a>](#largest-rectangle-in-histogram柱状图中最大的矩形)
+            * [implement-queue-using-stacks<a href="https://leetcode-cn.com/problems/implement-queue-using-stacks/" rel="nofollow">用栈实现队列</a>](#implement-queue-using-stacks用栈实现队列)
+            * [01-mtrix<a href="https://leetcode-cn.com/problems/01-matrix/" rel="nofollow">01 矩阵</a>](#01-mtrix01-矩阵)
+         * [二进制](#二进制)
+            * [single-number<a href="https://leetcode-cn.com/problems/single-number/" rel="nofollow">只出现一次的数字</a>](#single-number只出现一次的数字)
+            * [single-number-ii<a href="https://leetcode-cn.com/problems/single-number-ii/" rel="nofollow">只出现一次的数字 II</a>](#single-number-ii只出现一次的数字-ii)
+            * [single-number-iii<a href="https://leetcode-cn.com/problems/single-number-iii/" rel="nofollow">只出现一次的数字 III</a>](#single-number-iii只出现一次的数字-iii)
+            * [number-of-1-bits<a href="https://leetcode-cn.com/problems/number-of-1-bits/" rel="nofollow">位1的个数</a>](#number-of-1-bits位1的个数)
+            * [counting-bits<a href="https://leetcode-cn.com/problems/counting-bits/" rel="nofollow">比特位计数</a>](#counting-bits比特位计数)
+            * [reverse-bits<a href="https://leetcode-cn.com/problems/reverse-bits/" rel="nofollow">颠倒二进制位</a>](#reverse-bits颠倒二进制位)
+            * [bitwise-and-of-numbers-range<a href="https://leetcode-cn.com/problems/bitwise-and-of-numbers-range/" rel="nofollow">数字范围按位与</a>](#bitwise-and-of-numbers-range数字范围按位与)
+         * [二分搜索](#二分搜索)
+            * [binary-search<a href="https://leetcode-cn.com/problems/binary-search/" rel="nofollow">二分查找</a>](#binary-search二分查找)
+            * [search-insert-position<a href="https://leetcode-cn.com/problems/search-insert-position/" rel="nofollow">搜索插入位置</a>](#search-insert-position搜索插入位置)
+            * [search-a-2d-matrix<a href="https://leetcode-cn.com/problems/search-a-2d-matrix/" rel="nofollow">搜索二维矩阵</a>](#search-a-2d-matrix搜索二维矩阵)
+            * [first-bad-version<a href="https://leetcode-cn.com/problems/first-bad-version/" rel="nofollow">第一个错误的版本</a>](#first-bad-version第一个错误的版本)
+            * [find-minimum-in-rotated-sorted-array<a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/" rel="nofollow">寻找旋转排序数组中的最小值</a>](#find-minimum-in-rotated-sorted-array寻找旋转排序数组中的最小值)
+            * [find-minimum-in-rotated-sorted-array-ii<a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/" rel="nofollow">寻找旋转排序数组中的最小值 II</a>](#find-minimum-in-rotated-sorted-array-ii寻找旋转排序数组中的最小值-ii)
+            * [search-in-rotated-sorted-array<a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/" rel="nofollow">搜索旋转排序数组</a>](#search-in-rotated-sorted-array搜索旋转排序数组)
+            * [search-in-rotated-sorted-array-ii<a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/" rel="nofollow">搜索旋转排序数组 II</a>](#search-in-rotated-sorted-array-ii搜索旋转排序数组-ii)
+         * [动态规划](#动态规划)
+            * [<strong>背景</strong>](#背景)
+            * [使用场景](#使用场景)
+            * [四点要素](#四点要素)
+            * [常见四种类型](#常见四种类型)
+            * [1、矩阵类型（10\x）](#1矩阵类型10)
+            * [minimum-path-sum<a href="https://leetcode-cn.com/problems/minimum-path-sum/" rel="nofollow">最小路径和</a>](#minimum-path-sum最小路径和)
+            * [unique-paths<a href="https://leetcode-cn.com/problems/unique-paths/" rel="nofollow">不同路径</a>](#unique-paths不同路径)
+            * [unique-paths-ii<a href="https://leetcode-cn.com/problems/unique-paths-ii/" rel="nofollow">不同路径 II</a>](#unique-paths-ii不同路径-ii)
+            * [2、序列类型（40\x）](#2序列类型40)
+            * [climbing-stairs<a href="https://leetcode-cn.com/problems/climbing-stairs/" rel="nofollow">爬楼梯</a>](#climbing-stairs爬楼梯)
+            * [jump-game<a href="https://leetcode-cn.com/problems/jump-game/" rel="nofollow">跳跃游戏</a>](#jump-game跳跃游戏)
+            * [jump-game-ii<a href="https://leetcode-cn.com/problems/jump-game-ii/" rel="nofollow">跳跃游戏 II</a>](#jump-game-ii跳跃游戏-ii)
+            * [palindrome-partitioning-ii<a href="https://leetcode-cn.com/problems/palindrome-partitioning-ii/" rel="nofollow">分割回文串 II</a>](#palindrome-partitioning-ii分割回文串-ii)
+            * [longest-increasing-subsequence<a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/" rel="nofollow">最长上升子序列</a>](#longest-increasing-subsequence最长上升子序列)
+            * [word-break<a href="https://leetcode-cn.com/problems/word-break/" rel="nofollow">单词拆分</a>](#word-break单词拆分)
+            * [小结](#小结)
+            * [3. Two Sequences DP（40\x）](#3-two-sequences-dp40)
+            * [longest-common-subsequence<a href="https://leetcode-cn.com/problems/longest-common-subsequence/" rel="nofollow">最长公共子序列</a>](#longest-common-subsequence最长公共子序列)
+            * [edit-distance<a href="https://leetcode-cn.com/problems/edit-distance/" rel="nofollow">编辑距离</a>](#edit-distance编辑距离)
+            * [4.零钱和背包（10\x）](#4零钱和背包10)
+            * [coin-change<a href="https://leetcode-cn.com/problems/coin-change/" rel="nofollow">零钱兑换</a>](#coin-change零钱兑换)
 
 ## 数据结构篇
 
@@ -1347,7 +1411,7 @@ public:
 
 ### 二分搜索
 
-![img](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/binary_search_template.png)
+![image-20201024234216272](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201024234216272.png)
 
 #### binary-search[二分查找](https://leetcode-cn.com/problems/binary-search/)
 
@@ -1610,15 +1674,15 @@ public:
 
 遍历
 
-![img](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/dp_triangle.png)
+![image-20201024234124914](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201024234124914.png)
 
 分治法
 
-![img](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/dp_dc.png)
+![image-20201024234141990](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201024234141990.png)
 
 优化 DFS，缓存已经被计算的值（称为：记忆化搜索 本质上：动态规划）
 
-![img](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/dp_memory_search.png)
+![image-20201024234156795](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201024234156795.png)
 
 动态规划就是把大问题变成小问题，并解决了小问题重复计算的方法称为动态规划
 
