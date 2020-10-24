@@ -1813,7 +1813,7 @@ public:
         int res = 0;
         for(int i = 0; i < n - 1; i ++) {
             mmax = max(mmax, i + nums[i]);
-            if(end == i) {
+            if(end == i) {//更新点
                 end = mmax;
                 res ++;
             }
@@ -1822,4 +1822,36 @@ public:
     }
 };
 ```
+
+#### palindrome-partitioning-ii[分割回文串 II](https://leetcode-cn.com/problems/palindrome-partitioning-ii/)
+
+>给定一个字符串 *s*，将 *s* 分割成一些子串，使每个子串都是回文串。 返回符合要求的最少分割次数。
+
+```CPP
+class Solution {
+public:
+    int minCut(string s) {
+        /*
+        dp[i] 记录的是到字符这个地方所切割的次数
+        */
+        if(s.empty()) return 0;
+        int n = s.size();
+        vector<vector<bool> >P(n, vector<bool>(n, false));
+        vector<int>dp(n, 0);
+        for(int i = 0; i < n; i++) {
+            dp[i] = i;
+            for(int j = 0; j <= i; j++) {
+                if(s[i] == s[j] && (i - j < 2 || P[j + 1][i - 1])) {
+                    // acba不行，P[j + 1][i- 1]记录最里层是否为回文串abbccba, s[i]=s[j],p[j + 1][- 1]=true此处的true是里层的s[i] = s[j]
+                    P[j][i] = true;//标记为回文
+                    dp[i] = j==0? 0 : min(dp[i], dp[j - 1] + 1);//前面切割的次数+1是本次切割的次数，然后记录一个最小的到此处
+                }
+            }
+        }
+        return dp[n - 1];
+    }
+};
+```
+
+
 
