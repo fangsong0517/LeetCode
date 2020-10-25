@@ -2114,3 +2114,129 @@ public:
 
 > dp[i-a[j]] 决策 a[j]是否参与
 
+
+
+### 递归思维
+
+#### [reverse-string](https://leetcode-cn.com/problems/reverse-string/)[反转字符串](https://leetcode-cn.com/problems/reverse-string/)
+
+> 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 `char[]` 的形式给出。
+
+```cpp
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        /*for (int i = 0, j = s.size() - 1; i < j; i++, j--) {
+            swap(s[i], s[j]);
+        }*/
+        reverse(s.begin(), s.end());
+        return ;
+    }
+};
+```
+
+#### [swap-nodes-in-pairs](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)[两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
+
+> 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。 **你不能只是单纯的改变节点内部的值**，而是需要实际的进行节点交换。
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head == NULL || head->next == NULL) return head;
+        ListNode *p, *q, ret;
+        p = &ret;
+        q = head;
+        while(q && q->next) {
+            p->next = q->next;
+            q->next = p->next->next;
+            p->next->next = q;
+            p = q;
+            q = q->next;
+        }
+        return ret.next;
+    }
+};
+```
+
+#### [unique-binary-search-trees-ii](https://leetcode-cn.com/problems/unique-binary-search-trees-ii/)[不同的二叉搜索树 II](https://leetcode-cn.com/problems/unique-binary-search-trees-ii/)
+
+> 给定一个整数 n，生成所有由 1 ... n 为节点所组成的二叉搜索树。
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<TreeNode*> generate(int start, int end) {
+        if(start > end) {
+            return {nullptr};
+        }
+        vector<TreeNode *> res;
+        for(int i = start; i <= end; i++) {
+            //递归生成左右子树
+            vector<TreeNode *>leftTrees = generate(start, i - 1);
+            vector<TreeNode *>rightTrees = generate(i + 1, end);
+            //合并左右子树返回
+            for(int j = 0; j < leftTrees.size(); j++) {
+                for(int k = 0; k < rightTrees.size(); k++) {
+                    TreeNode *node = new TreeNode(i);
+                    node->left = leftTrees[j];
+                    node->right = rightTrees[k];
+                    res.push_back(node);
+                }
+            }
+        }
+        return res;
+    }
+    vector<TreeNode*> generateTrees(int n) {
+        vector<TreeNode*>res;
+        if(n == 0) return res;
+        return generate(1, n);
+    }
+};
+```
+
+
+
+#### [fibonacci-number](https://leetcode-cn.com/problems/fibonacci-number/)[斐波那契数](https://leetcode-cn.com/problems/fibonacci-number/)
+
+> 斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： F(0) = 0, F(1) = 1 F(N) = F(N - 1) + F(N - 2), 其中 N > 1. 给定 N，计算 F(N)。
+
+```cpp
+class Solution {
+public:
+    int f[150000];
+    int fib(int N) {
+        if(N < 2) return N;
+        if(f[N] != 0) return f[N];
+        int ret = fib(N - 1) + fib(N - 2);
+        f[N] = ret;
+        return ret;
+    }
+};
+```
+
+
+
+
+
