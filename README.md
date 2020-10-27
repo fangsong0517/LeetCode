@@ -2275,3 +2275,80 @@ public:
     }
 };
 ```
+
+#### [find-all-anagrams-in-a-string](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)[找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
+
+> 给定一个字符串 **s** 和一个非空字符串 **p**，找到 **s** 中所有是 **p** 的字母异位词的子串，返回这些子串的起始索引。
+
+```cpp
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int>res;
+        if(s.size() == 0) return res;
+        if(s.size() < p.size()) return res;
+        vector<int>hashmap1(26, 0);
+        int n = p.size();
+        vector<int>hashmap2(26, 0);
+        for(int i = 0; i < n; i++) {
+            hashmap1[p[i] - 'a']++;
+            hashmap2[s[i] - 'a']++;
+        }
+        for(int i = n; i < s.size(); i++) {
+            if(hashmap2 == hashmap1) res.push_back(i - n);
+            hashmap2[s[i - n] - 'a']--;
+            hashmap2[s[i] - 'a']++;
+        }
+        if(hashmap2 == hashmap1) {
+            res.push_back(s.size() - n);
+        }
+        return res;
+    }
+};
+```
+
+#### [longest-substring-without-repeating-characters](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)[无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+
+> 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1:
+>
+> 输入: "abcabcbb" 输出: 3 
+>
+> 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+ // 滑动窗口核心点：1、右指针右移 2、根据题意收缩窗口 3、左指针右移更新窗口 4、根据题意计算结果
+
+```cpp
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int ind[256] = {0};
+        int temp = 0;
+        int ans = 0;
+        for(int i = 0; s[i]; i++) {
+            temp += 1;
+            temp = min(temp, i  + 1 - ind[s[i]]);//取最小值避开了中间存在重复值
+            ind[s[i]] = i + 1;
+            ans = max(ans, temp);
+        }
+        return ans;
+    }
+};
+```
+
+#### 总结
+
+- 和双指针题目类似，更像双指针的升级版，滑动窗口核心点是维护一个窗口集，根据窗口集来进行处理
+- 核心步骤
+  - right 右移
+  - 收缩
+  - left 右移
+  - 求结果
+
+
+
+### 二叉搜索树
+
+- 每个节点中的值必须大于（或等于）存储在其左侧子树中的任何值。
+- 每个节点中的值必须小于（或等于）存储在其右子树中的任何值。
+
+#  
