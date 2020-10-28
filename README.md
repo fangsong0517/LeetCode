@@ -1409,6 +1409,8 @@ public:
 };
 ```
 
+## 基础算法篇
+
 ### 二分搜索
 
 ![image-20201024234216272](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201024234216272.png)
@@ -2114,7 +2116,7 @@ public:
 
 > dp[i-a[j]] 决策 a[j]是否参与
 
-
+## 算法思维
 
 ### 递归思维
 
@@ -2415,3 +2417,219 @@ public:
 };
 ```
 
+
+
+#### [delete-node-in-a-bst](https://leetcode-cn.com/problems/delete-node-in-a-bst/)[删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)
+
+> 给定一个二叉搜索树的根节点 root 和一个值 key，删除二叉搜索树中的 key 对应的节点，并保证二叉搜索树的性质不变。返回二叉搜索树（有可能被更新）的根节点的引用。
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+         // 删除节点分为三种情况：
+    // 1、只有左节点 替换为右
+    // 2、只有右节点 替换为左
+    // 3、有左右子节点 左子节点连接到右边最左节点即可
+        if(root == NULL) return root;
+        if(root->val < key) {
+            root->right = deleteNode(root->right, key);
+        } else if(root->val > key) {
+            root->left = deleteNode(root->left, key);
+        } else {
+            if(root->left == NULL) {
+                return root->right;
+            } else if(root->right == NULL) {
+                return root->left;
+            } else {
+                TreeNode *cur = root->right;
+                // 一直向左找到最后一个左节点即可
+                while(cur->left != NULL) {
+                    cur = cur->left;
+                }
+                cur->left = root->left;
+                return root->right;
+            }
+        }
+        return root;
+    }
+};
+```
+
+![image-20201028175359767](http://test-fangsong-imgsubmit.oss-cn-beijing.aliyuncs.com/img/image-20201028175359767.png)
+
+#### [balanced-binary-tree](https://leetcode-cn.com/problems/balanced-binary-tree/)[平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
+
+> 给定一个二叉树，判断它是否是高度平衡的二叉树。
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int depth(TreeNode *root) {//查找子树深度
+        if(root == NULL) return 0;
+        int l = depth(root->left), r = depth(root->right);
+        return (l > r ? l : r) + 1;
+    }
+    bool isBalanced(TreeNode* root) {
+        if(root == NULL) return true;
+        int l = depth(root->left), r = depth(root->right);//左边深度，右边深度
+        if(abs(l - r) > 1) return false;
+        return isBalanced(root->left) && isBalanced(root->right);//左右是否都合法
+    }
+};
+```
+
+### 回溯法
+
+#### [subsets](https://leetcode-cn.com/problems/subsets/)[子集](https://leetcode-cn.com/problems/subsets/)
+
+> 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {//二进制法
+        vector<vector<int>>res;
+        int n = nums.size();
+        vector<int>w;
+        for(int i = 0; i < pow(2, n); i++) {
+            for(int j = 0; j < n; j++) {
+                if((i >> j) & 1) {
+                    w.push_back(nums[j]);
+                }
+            }
+            res.push_back(w);
+            w.clear();
+        }
+        return res;
+    }
+};
+```
+
+#### [subsets-ii](https://leetcode-cn.com/problems/subsets-ii/)[子集 II](https://leetcode-cn.com/problems/subsets-ii/)
+
+> 给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。说明：解集不能包含重复的子集。
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        set<vector<int>>res;
+        int n = nums.size();
+        vector<int>w;
+        for(int i = 0; i < pow(2, n); i++) {
+            for(int j = 0; j < n; j++) {
+                if((i >> j) & 1) {
+                    w.push_back(nums[j]);
+                }
+            }
+            sort(w.begin(), w.end());
+            res.insert(w);
+            w.clear();
+        }
+        vector<vector<int>>ret;
+        for(auto i : res) {
+            ret.push_back(i);
+        }
+        return ret; 
+    }
+};
+```
+
+#### [permutations](https://leetcode-cn.com/problems/permutations/)[全排列](https://leetcode-cn.com/problems/permutations/)
+
+> 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
+
+思路：需要记录已经选择过的元素，满足条件的结果才进行返回
+
+
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>>ret;
+    void dfs(vector<int>& now, vector<int>& nums, vector<int>&check) {
+        if(now.size() == nums.size()) {
+            ret.push_back(now);
+            return;
+        }
+        for(int i = 0; i < nums.size(); i++) {
+            if(!check[i]) {
+                check[i] = true;
+                now.push_back(nums[i]);
+                dfs(now, nums, check);
+                check[i] = false;
+                now.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<int>a;
+        vector<int>check(nums.size() + 1, false);
+        dfs(a, nums, check);
+        return ret;
+    }
+};
+```
+
+#### [permutations-ii](https://leetcode-cn.com/problems/permutations-ii/)[全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
+
+> 给定一个可包含重复数字的序列，返回所有不重复的全排列。
+
+```cpp
+class Solution {
+public:
+    set<vector<int>>ret;
+    void dfs(vector<int>& now, vector<int>& nums, vector<int>&check) {
+        if(now.size() == nums.size()) {
+            ret.insert(now);
+            return;
+        }
+        for(int i = 0; i < nums.size(); i++) {
+            if(!check[i]) {
+                check[i] = true;
+                now.push_back(nums[i]);
+                dfs(now, nums, check);
+                check[i] = false;
+                now.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<int>a;
+        vector<int>check(nums.size() + 1, false);
+        dfs(a, nums, check);
+        vector<vector<int>>res;
+        for(auto i : ret) {
+            res.push_back(i);
+        }
+        return res;
+    }
+};
+```
+
+#### 练习: 
+
+#### [组合总和](https://leetcode-cn.com/problems/combination-sum/)
