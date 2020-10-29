@@ -2658,3 +2658,98 @@ public:
 #### 练习: 
 
 #### [组合总和](https://leetcode-cn.com/problems/combination-sum/)
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> res;
+        vector<int>track;
+        sort(candidates.begin(), candidates.end());
+        dfs(res, track, candidates, target, 0, 0);
+        return res;
+    }
+    void dfs(vector<vector<int>> &res, vector<int>&track, vector<int>&candidates, int target, int lastnum, int sum) {
+        if(sum == target) {
+            res.push_back(track);
+            return;
+        }
+        for(int i = lastnum; i < candidates.size(); i++) {
+            if(sum + candidates[i] > target) break;
+            track.push_back(candidates[i]);
+            dfs(res, track, candidates, target, i, sum + candidates[i]);
+            track.pop_back();
+        }
+    }
+};
+
+
+```
+
+#### [电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)
+
+```cpp
+class Solution {
+public:
+string s[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    vector<string>res;
+    string cur;
+    vector<string> letterCombinations(string digits) {
+        if(!digits.size()) return res;
+        DFS(digits);
+        return res;
+    }
+    void DFS(string digits) {
+        if(!digits.size()) {
+            res.push_back(cur);
+        } else {
+            char num = digits[0];
+            string letter = s[num - '0'];
+            for(int i = 0; i < letter.size(); i++) {
+                cur.push_back(letter[i]);
+                DFS(digits.substr(1));
+                cur.pop_back();
+            }
+        }
+    }
+};
+```
+
+#### [分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/)
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>>res;
+    vector<int>temp;
+    bool isPalindome(string s) {
+        int i = 0, j = s.size() - 1;
+        while(i < j) {
+            if(s[i] != s[j]) {
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+    void recursion(string s, int a, int b) {
+        if(a > b) {
+            res.push_back(temp);
+            return;
+        }
+        for(int i = 1; i <= b - a + 1; i++) {
+            if(isPalindome(s.substr(a, i))) {
+                temp.push_back(s.substr(a, i));
+                recursion(s, a + i, b);
+                temp.pop_back();
+            }
+        }
+    }
+    vector<vector<string>> partition(string s) {
+        recursion(s, 0, s.size() - 1);
+        return res;
+    }
+};
+```
+
