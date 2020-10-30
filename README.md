@@ -2753,3 +2753,33 @@ public:
 };
 ```
 
+#### [复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/)
+
+```cpp
+class Solution {
+public:
+    vector<string>res;
+    vector<string> restoreIpAddresses(string s) {
+        if(s.size() > 12 || s.size() < 4) return {};
+        dfs(s, "", 0, 0);
+        return res;
+    }
+    void dfs(string &s, string cur, int depth, int start) {
+        if(depth == 4) {
+            if(cur.size() - 3 == s.size()) {//3是加了3个"."
+                res.push_back(cur);
+            }
+            return;
+        }
+        int num = 0;
+        string str = "";
+        for(int i = 1; i <= 3; i++) {
+            num = num * 10 + (s[start + i - 1] - '0');
+            if(num > 255 || (i > 1 && num < 10)){break;}//排除大于255和前导0
+            str += s[start + i - 1];
+            dfs(s, cur + str + (depth==3 ? "":"."), depth + 1, start + i);
+        }
+    }
+};
+```
+
